@@ -1,0 +1,101 @@
+<header class="bg-neutral-300 relative">
+  <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
+    <a class="block text-teal-600" href="#" aria-label="Accueil">
+      <div class="flex justify-center text-teal-600 lg:justify-start">
+        <img src="{{ asset('img/logo.svg') }}" alt="Logo hodlcrypto.fr" class="w-20 h-20">
+      </div>
+    </a>
+
+    <div class="flex flex-1 items-center justify-end md:justify-between relative">
+      <!-- Menu pour les grands écrans -->
+      <nav aria-label="Navigation principale" class="hidden md:block">
+        <ul class="flex items-center gap-6 text-sm">
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ path('app_main') }}" title="Accueil"> Accueil </a>
+          </li>
+
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#" title="Portfolio"> Portfolio </a>
+          </li>
+
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ path('app_profil') }}" title="Profil"> Profil </a>
+          </li>
+
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75 whitespace-nowrap" href="#" title="Saisie Transactions"> Saisie Transactions </a>
+          </li>
+
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#" title="Contact"> Contact </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Menu pour les petits écrans -->
+      <nav aria-label="Global" id="mobile-menu" class="hidden md:hidden absolute bg-neutral-300 top-full left-0 w-full px-4 sm:px-6 lg:px-8 z-10">
+        <ul class="flex flex-col items-start gap-6 text-sm py-4">
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#">Accueil</a>
+          </li>
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#">Portfolio</a>
+          </li>
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ path('app_profil') }}">Profil</a>
+          </li>
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#">Saisie Transactions</a>
+          </li>
+          <li>
+            <a class="text-gray-500 transition hover:text-gray-500/75" href="#">Historique</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <div class="sm:flex sm:gap-4">
+          <a
+            class="block rounded-md bg-neutral-400 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-600"
+            href="#"
+          >
+            Connexion
+          </a>
+
+          <a
+            class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-neutral-600 transition hover:text-neutral-600/75 sm:block"
+            href="#"
+          >
+            S'inscrire
+          </a>
+        </div>
+
+        <!-- Bouton Toggle Menu -->
+        <button
+          id="menu-toggle"
+          class="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+        >
+          <span class="sr-only">Toggle menu</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"    
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Ajout du script pour le Toggle -->
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    var menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>

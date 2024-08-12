@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper bg-neutral-300">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <p>
+        This friendly message is coming from:
+        <code>{{ controller_name }}</code>
+        <br>
+        The controller makes a call to the template
+        <code>templates/profil/index.html.twig</code>
+    </p>
+    <p>
+        <a href="{{ path('app_profil') }}" title="Profil"> Profil </a>
+    </p>
+    <p>
+        <a href="{{ path('app_profil_edit') }}" title="Modifier le profil"> Modifier le profil </a>
+    </p>
+    <p>
+        <a href="{{ path('app_profil_password') }}" title="Modifier le mot de passe"> Modifier le mot de passe </a>
+    </p>
+</div>
+{% endblock %}
