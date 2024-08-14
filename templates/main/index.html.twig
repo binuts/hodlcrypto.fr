@@ -1,1 +1,43 @@
 {% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="bg-neutral-300">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-bold sm:text-4xl">
+        Bienvenue sur HodlCrypto.fr 🚀
+      </h2>
+        <p class="mt-2 text-lg text-neutral-700">
+        HodlCrypto.fr est un site de suivi de vos avoirs en cryptommonie.
+        </p>
+        <p class="text-lg text-neutral-700">
+        Vous pouvez y ajouter vos cryptomonnaies et suivre leur évolution en temps réel.
+        </p>
+      </h2>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+      <div class="relative h-64 overflow-hidden sm:h-80 lg:h-full">
+      <img
+        alt=""
+        src="{{ asset('img/homepage.png') }}"
+        class="absolute inset-0 h-full w-full object-cover"
+        style="object-fit: contain;"
+      />
+      </div>
+
+      <div class="lg:py-16">
+        <article class="space-y-4 text-gray-600">
+          <p>
+            Suivez l'ensemble de vos cryptomonnaies en renseignant vos transactions via l'interface de saisie.
+          </p>
+
+          <p>
+            Obtenez la valorisation de votre portefeuille en $, € ou BTC.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

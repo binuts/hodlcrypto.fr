@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CoinGeckoController!{% endblock %}
+
+{% block body %}
+    <h1>Recherche de Cryptomonnaies</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.coin) }}
+        <button type="submit">Rechercher</button>
+    {{ form_end(form) }}
+
+    {% if selectedCoin %}
+        <h2>Cryptomonnaie sélectionnée : {{ selectedCoin }}</h2>
+        {# Ajoute ici les détails supplémentaires si nécessaire #}
+    {% endif %}
+{% endblock %}

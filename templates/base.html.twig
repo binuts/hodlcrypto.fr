@@ -1,32 +1,32 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-</head>
+<html lang="fr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block stylesheets %}
+          {{ encore_entry_link_tags('app') }}
+      {% endblock %}
+  </head>
 
-<body>
-  <header>
-    {% block header %}
-      {% include 'inc/header.html.twig' %}
-    {% endblock %}
-  </header>
+  <body>
+    <header>
+      {% block header %}
+        {% include 'inc/header.html.twig' %}
+      {% endblock %}
+    </header>
+    
+    <main>
+      {% block body %}{% endblock %}
+    </main>
 
-  <main>
-    {% block body %}{% endblock %}
-  </main>
-
-  <footer>
-    {% block footer %}
-      {% include 'inc/footer.html.twig' %}
-    {% endblock %}
-  </footer>
-  
-    {% block javascripts %}
-      {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-</body>
+    <footer>
+      {% block footer %}
+        {% include 'inc/footer.html.twig' %}
+      {% endblock %}
+    </footer>
+    
+      {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+      {% endblock %}
+  </body>
 </html>
