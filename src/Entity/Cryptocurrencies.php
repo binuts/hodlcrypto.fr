@@ -46,6 +46,12 @@ class Cryptocurrencies
     #[ORM\OneToMany(targetEntity: Transactions::class, mappedBy: 'crypto_id', orphanRemoval: true)]
     private Collection $crypto_id;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 10)]
+    private ?string $last_price = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_last_price = null;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -185,6 +191,30 @@ class Cryptocurrencies
                 $cryptoId->setCrypto(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastPrice(): ?string
+    {
+        return $this->last_price;
+    }
+
+    public function setLastPrice(string $last_price): static
+    {
+        $this->last_price = $last_price;
+
+        return $this;
+    }
+
+    public function getDateLastPrice(): ?\DateTimeInterface
+    {
+        return $this->date_last_price;
+    }
+
+    public function setDateLastPrice(\DateTimeInterface $date_last_price): static
+    {
+        $this->date_last_price = $date_last_price;
 
         return $this;
     }

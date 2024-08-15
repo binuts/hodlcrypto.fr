@@ -32,27 +32,27 @@ class CoinGeckoController extends AbstractController
         ]);
     }
 
-    #[Route('/coingecko/search', name: 'coingecko_search') ]
-    public function search(Request $request): Response
-    {
-        $form = $this->createForm(CoinSearchType::class);
-        $form->handleRequest($request);
+    // #[Route('/coingecko/search', name: 'coingecko_search') ]
+    // public function search(Request $request): Response
+    // {
+    //     $form = $this->createForm(CoinSearchType::class);
+    //     $form->handleRequest($request);
 
-        $selectedCoin = null;
+    //     $selectedCoin = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $selectedCoinId = $form->get('coin')->getData();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $selectedCoinId = $form->get('coin')->getData();
 
-            if ($selectedCoinId) {
-                // Logique pour traiter la sélection du coin
-                // Par exemple, appeler une autre API pour obtenir des détails
-                $selectedCoin = $selectedCoinId;  // Remplace cela par la logique appropriée
-            }
-        }
+    //         if ($selectedCoinId) {
+    //             // Logique pour traiter la sélection du coin
+    //             // Par exemple, appeler une autre API pour obtenir des détails
+    //             $selectedCoin = $selectedCoinId;  // Remplace cela par la logique appropriée
+    //         }
+    //     }
 
-        return $this->render('coingecko/coins.html.twig', [
-            'form' => $form->createView(),
-            'selectedCoin' => $selectedCoin,
-        ]);
-    }
+    //     return $this->render('coingecko/coins.html.twig', [
+    //         'form' => $form->createView(),
+    //         'selectedCoin' => $selectedCoin,
+    //     ]);
+    // }
 }
