@@ -16,6 +16,14 @@ class CryptocurrenciesRepository extends ServiceEntityRepository
         parent::__construct($registry, Cryptocurrencies::class);
     }
 
+    public function countAllCryptocurrencies(): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Cryptocurrencies[] Returns an array of Cryptocurrencies <objects>  </objects>
     //     */

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Cryptocurrencies;
 use App\Entity\Transactions;
 use App\Form\TransactionType;
-use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,22 +17,17 @@ class TransactionController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $transaction = new Transactions();
-        $form = $this->createForm(TransactionType::class, $transaction);
-        $form->handleRequest($request);
+        $transactionForm = $this->createForm(TransactionType::class, $transaction);
+        $transactionForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // write to database for exemple with attributes in Entity\Transactions
-
+        if ($transactionForm->isSubmitted() && $transactionForm->isValid()) {
             $transaction->setUser($this->getUser());
-            $transaction->setQuantity('10');
-            $transaction->setTransactionType(Transactions::TRANSACTION_TYPE_BUY);
-            $transaction->setPriceAtTransactionInUsdt('1000');
-            $transaction->setTransactionDate(new \DateTime('Europe/Paris'));
-            dump($entityManager->getRepository(Cryptocurrencies::class)->find(1));
-            $transaction->setCrypto($entityManager->getRepository(Cryptocurrencies::class)->find(1));
-
-            // write crytpo_id in cryptocurrency table
-            // $transaction->setCrypto($entityManager->getRepository(Cryptocurrencies::class)->find(1));
+            $transaction->setCrypto($transactionForm->get('crypto')->getData());
+            $transaction->setQuantity($transactionForm->get('quantity')->getData());
+            $transaction->setTransactionType($transactionForm->get('transactionType')->getData());
+            $transaction->setPriceAtTransactionInUsdt($transactionForm->get('priceAtTransactionInUsdt')->getData());
+            $transaction->setTransactionDate($transactionForm->get('transactionDate')->getData());
+            // $transaction->setCrypto($entityManager->getRepository(Cryptocurrencies::class)->find(2));
 
 
             dump($transaction);
@@ -41,15 +35,14 @@ class TransactionController extends AbstractController
             $entityManager->persist($transaction);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Transaction created!');
+            $this->addFlash('success', 'Transaction prise en compte');
 
-            return $this->redirectToRoute('app_transaction');
+            return $this->redirectToRoute('app_portfolio');
         }
 
 
         return $this->render('transaction/index.html.twig', [
-            'controller_name' => 'TransactionController',
-            'form' => $form->createView(),
+            'transactionForm' => $transactionForm->createView(),
         ]);
     }
 }

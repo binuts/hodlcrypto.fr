@@ -5,14 +5,26 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+<section class="bg-neutral-300 p-4 lg:px-8">
+    <div class="container mx-auto">
+        <h1 class="text-gray-700 text-2xl font-bold mb-4">Ajouter un coin</h1>
+
+        {{ form_errors(coinForm) }}
+
         {{ form_start(coinForm) }}
 
-        {{ form_widget(coinForm) }}
-
-        <button>Create !</button>
-
-        {{ form_end(coinForm) }}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+            {{ form_label(coinForm.name, 'Nom :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
+            {{ form_widget(coinForm.name, {'class': 'form-input w-full'}) }}
+            </label>
+        </div>
     </div>
 
+    <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
+        Valider
+    </button>
+
+    {{ form_end(coinForm) }}
+</section>
 {% endblock %}

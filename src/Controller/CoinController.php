@@ -18,8 +18,8 @@ class CoinController extends AbstractController
     #[Route('/create', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $coin = new Cryptocurrencies();
-        $coinForm = $this->createForm(CoinType::class, $coin);
+        $coinToAdd = new Cryptocurrencies();
+        $coinForm = $this->createForm(CoinType::class, $coinToAdd);
         $coinForm->handleRequest($request);
 
         if ($coinForm->isSubmitted() && $coinForm->isValid()) {
@@ -33,19 +33,15 @@ class CoinController extends AbstractController
                 'market_data' => 'true',
                 'precision' => 4
             ]);
-            $coin = $entityManager->getRepository(Cryptocurrencies::class)->findOneBy(['symbol' => $newToken['symbol']]);
 
-            if ($coin !== null) {
-                $coin->setName($newToken['name']);
-                $coin->setSymbol($newToken['symbol']);
-                $coin->setAllTimeHigh($newToken['market_data']['ath']['usd']);
-                $coin->setDateAth(new \DateTime($newToken[
-                    'market_data']['ath_date']['usd']));
-                $coin->setAllTimeLow($newToken['market_data']['atl']['usd']);
-                $coin->setDateAtl(new \DateTime($newToken[
-                    'market_data']['atl_date']['usd']));
-                $coin->setLastPrice($newToken['market_data']['current_price']['usd']);
-                $coin->setDateLastPrice(new \DateTime('now'));
+            $coinToAdd = $entityManager->getRepository(Cryptocurrencies::class)->findOneBy(['symbol' => $newToken['symbol']]);
+
+            if ($coinToAdd !== null) {
+
+                $this->addFlash('error', 'Token ' . $newToken['name'] . ' déjà existant !');
+
+            return $this->redirectToRoute('app_coin_create');
+
             } else {
                 $coin = new Cryptocurrencies();
                 $coin->setName($newToken['name']);
@@ -58,10 +54,14 @@ class CoinController extends AbstractController
                     'market_data']['atl_date']['usd']));
                 $coin->setLastPrice($newToken['market_data']['current_price']['usd']);
                 $coin->setDateLastPrice(new \DateTime('now'));
-                }
 
-            $entityManager->persist($coin);
-            $entityManager->flush();
+                $entityManager->persist($coin);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Token ' . $newToken['name'] . ' créé !');
+
+            return $this->redirectToRoute('app_portfolio');
+                }
         }
 
         return $this->render('coin/create.html.twig', [

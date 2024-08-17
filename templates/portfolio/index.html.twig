@@ -11,26 +11,37 @@
           <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
           <h2 class="text-gray-600 ml-0.5">Vue global du portfolio</h2>
         </div>
-        <div class="flex flex-wrap items-start justify-end -mb-3">
-          <a class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3" href="{{ path('app_transaction_new') }}">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Saisir une nouvelle transaction
-          </a>
+        <div class="flex flex-wrap">
+          <div class="flex flex-wrap items-start justify-end -mb-3">
+            <a class="inline-flex px-5 py-3 text-white bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 rounded-md ml-6 mb-3 whitespace-nowrap" href="{{ path('app_coin_create') }}">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Ajouter un nouveau coin
+            </a>
+          </div>
+          <div class="flex flex-wrap items-start justify-end -mb-3">
+            <a class="inline-flex px-5 py-3 text-white bg-teal-600 hover:bg-teal-700 focus:bg-teal-700 rounded-md ml-6 mb-3 whitespace-nowrap" href="{{ path('app_transaction_new') }}">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Saisir une nouvelle transaction
+            </a>
+          </div>
         </div>
       </div>
 
       <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+            <img src=  "{{ asset('img/crypto-wallet.svg') }}" alt="Logo hodlcrypto.fr" class=" w-20 h-20">
+            {# <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            </svg> #}
           </div>
           <div>
-            <span class="block text-2xl font-bold">62</span>
-            <span class="block text-gray-500">Students</span>
+            <span class="block text-2xl font-bold">{{ crypto_count }}</span>
+            <span class="block text-gray-500">cryptos différentes</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg">

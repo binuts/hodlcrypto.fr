@@ -1,12 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une transaction{% endblock %}
+{% block title %}
+    Ajouter une transaction
+{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une transaction</h1>
+<section class="bg-neutral-300 p-4 lg:px-8">
+    <div class="container mx-auto">
+        <h1 class="text-gray-700 text-2xl font-bold mb-4">Ajouter une transaction</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Ajouter</button>
-    {{ form_end(form) }}
+        {{ form_errors(transactionForm) }}
+
+        {{ form_start(transactionForm) }}
+
+        {{ form_widget(transactionForm) }}
+
+        {# <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+            {{ form_label(coinForm.name, 'Nom :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
+            {{ form_widget(coinForm.name, {'class': 'form-input w-full'}) }}
+            </label>
+        </div> #}
+    </div>
+
+    <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
+        Valider
+    </button>
+
+    {{ form_end(transactionForm) }}
+</section>
 {% endblock %}
