@@ -18,17 +18,24 @@ class CoinController extends AbstractController
     #[Route('/create', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $coinToAdd = new Cryptocurrencies();
-        $coinForm = $this->createForm(CoinType::class, $coinToAdd);
-        $coinForm->handleRequest($request);
+        $coinGeckoCLient = new CoinGeckoClient();
+        $list = $coinGeckoCLient->coins()->getList();
 
-        if ($coinForm->isSubmitted() && $coinForm->isValid()) {
-            $coin = $coinForm->getData();
+        $choices = [];
+        foreach ($list as $coin) {
+            $choices[$coin['name']] = $coin['id'];
+        }
 
-            $newToken = new Cryptocurrencies();
-            $token = $coin->getName();
-            $coins = new CoinGeckoClient();
-            $newToken = $coins->coins()->getCoin($token, [
+        $form = $this->createForm(CoinType::class, null, [
+            'choices' => $choices,
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $nameOfNewCoin = $form->getData();
+            dump($nameOfNewCoin);
+            $newToken = $coinGeckoCLient->coins()->getCoin($nameOfNewCoin['name'], [
                 'tickers' => 'true',
                 'market_data' => 'true',
                 'precision' => 4
@@ -65,7 +72,7 @@ class CoinController extends AbstractController
         }
 
         return $this->render('coin/create.html.twig', [
-            'coinForm' => $coinForm->createView(),
+            'coinForm' => $form->createView(),
         ]);
     }
 }

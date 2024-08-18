@@ -20,7 +20,6 @@ class PortfolioController extends AbstractController
     public function index(): Response
     {
         $cryptoCount = $this->cryptocurrenciesRepository->countAllCryptocurrencies();
-        dump($cryptoCount);
 
         return $this->render('portfolio/index.html.twig', [
             'controller_name' => 'PortfolioController',

@@ -15,17 +15,10 @@
 
         {{ form_widget(transactionForm) }}
 
-        {# <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">
-            {{ form_label(coinForm.name, 'Nom :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
-            {{ form_widget(coinForm.name, {'class': 'form-input w-full'}) }}
-            </label>
-        </div> #}
+        <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
+            Valider
+        </button>
     </div>
-
-    <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
-        Valider
-    </button>
 
     {{ form_end(transactionForm) }}
 </section>

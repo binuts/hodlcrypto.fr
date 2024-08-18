@@ -26,12 +26,13 @@
                 {{ form_label(registrationForm.plainPassword, 'Mot de passe :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
                 {{ form_widget(registrationForm.plainPassword, {'class': 'form-input w-full'}) }}
             </div>
+
+            <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
+                S'enregistrer
+            </button>
         </div>
     </div>
 
-    <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
-        S'enregistrer
-    </button>
     {{ form_end(registrationForm) }}
 </section>
 {% endblock %}

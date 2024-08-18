@@ -2,5 +2,15 @@
     <p class="p-2 text-center text-gray-500">
         <a href="{{ path('app_main') }}">&copy; {{ "now"|date("Y") }} hodlcrypto.fr</a>
     </p>
-    </p>
+        {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2({
+                    placeholder: 'Rechercher une crypto',
+                    allowClear: true
+                });
+            });
+        </script>
+    {% endblock %}
 </footer>
