@@ -1,56 +1,50 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      {% block stylesheets %}
-          {{ encore_entry_link_tags('app') }}
-      {% endblock %}
-      <script src="select2js/select2.min.js"></script>
-  </head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
 
-  <body>
-    <header>
-      {% block header %}
-        {% include 'inc/header.html.twig' %}
-      {% endblock %}
-    </header>
+	<body class="min-h-screen flex flex-col">
+		<header>
+			{% block header %}
+				{% include 'inc/header.html.twig' %}
+			{% endblock %}
+		</header>
 
-        {# read and display all flash messages #}
-        {# if label = success, then display a green message
-        if label = error, then display a red message
-        if label = warning, then display a yellow message
-        if label = info, then display a blue message #}
-    {# read and display all flash messages #}
-    {% set labels = ['success', 'error', 'warning', 'info'] %}
+		{# read and display all flash messages #}
+		{% set labels = ['success', 'error', 'warning', 'info'] %}
 
-    {% for label, messages in app.flashes %}
-      {% for message in messages %}
-        {% if label == 'success' %}
-          {% set label_class = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-1/2' %}
-        {% elseif label == 'error' %}
-          {% set label_class = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/2' %}
-        {% elseif label == 'warning' %}
-          {% set label_class = 'bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative w-1/2' %}
-        {% elseif label == 'info' %}
-          {% set label_class = 'bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative w-1/2' %}
-        {% endif %}
-        <section class="bg-neutral-300 w-full w-screen h-screen flex items-center justify-center">
-          <div class="w-1/2 {{ label_class }}">
-              {{ message }}
-          </div>
-        </section>
-      {% endfor %}
-    {% endfor %}
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				{% if label == 'success' %}
+					{% set label_class = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-1/2' %}
+				{% elseif label == 'error' %}
+					{% set label_class = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-1/2' %}
+				{% elseif label == 'warning' %}
+					{% set label_class = 'bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative w-1/2' %}
+				{% elseif label == 'info' %}
+					{% set label_class = 'bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative w-1/2' %}
+				{% endif %}
+				<section class="bg-neutral-300 w-screen flex items-center justify-center">
+					<div class="w-1/2 {{ label_class }}">
+						{{ message }}
+					</div>
+				</section>
+			{% endfor %}
+		{% endfor %}
 
-    <main>
-      {% block body %}{% endblock %}
-    </main>
+		<main class="flex-grow bg-neutral-300"> {% block body %}{% endblock %}
+			</main>
 
-    <footer>
-      {% block footer %}
-        {% include 'inc/footer.html.twig' %}
-      {% endblock %}
-    </footer>
-  </body>
-</html>
+			<footer class="bg-neutral-300 text-white py-4">
+				{% block footer %}
+					{% include 'inc/footer.html.twig' %}
+				{% endblock %}
+			</footer>
+		</body>
+	</html>

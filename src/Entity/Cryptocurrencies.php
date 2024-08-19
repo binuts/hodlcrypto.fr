@@ -55,10 +55,17 @@ class Cryptocurrencies
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_last_price = null;
 
+    /**
+     * @var Collection<int, Balances>
+     */
+    #[ORM\OneToMany(targetEntity: Balances::class, mappedBy: 'crypto')]
+    private Collection $balances;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->crypto_id = new ArrayCollection();
+        $this->balances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +225,36 @@ class Cryptocurrencies
     public function setDateLastPrice(\DateTimeInterface $date_last_price): static
     {
         $this->date_last_price = $date_last_price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Balances>
+     */
+    public function getBalances(): Collection
+    {
+        return $this->balances;
+    }
+
+    public function addBalance(Balances $balance): static
+    {
+        if (!$this->balances->contains($balance)) {
+            $this->balances->add($balance);
+            $balance->setCrypto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBalance(Balances $balance): static
+    {
+        if ($this->balances->removeElement($balance)) {
+            // set the owning side to null (unless already changed)
+            if ($balance->getCrypto() === $this) {
+                $balance->setCrypto(null);
+            }
+        }
 
         return $this;
     }

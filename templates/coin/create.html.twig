@@ -9,14 +9,14 @@
     <div class="container mx-auto">
         <h1 class="text-gray-700 text-2xl font-bold mb-4">Ajouter un coin</h1>
 
-        {{ form_errors(coinForm) }}
+        {{ form_errors(form) }}
 
-        {{ form_start(coinForm) }}
+        {{ form_start(form) }}
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">
-            {{ form_label(coinForm.name, 'Nom :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
-            {{ form_widget(coinForm.name, {'class': 'form-input w-full'}) }}
+            {{ form_label(form.name, 'Nom :', {'class': 'block text-gray-700 text-sm font-bold mb-2'}) }}
+            {{ form_widget(form.name, {'class': 'form-input w-full'}) }}
             </label>
         </div>
 
@@ -25,6 +25,6 @@
         </button>
     </div>
 
-    {{ form_end(coinForm) }}
+    {{ form_end(form) }}
 </section>
 {% endblock %}

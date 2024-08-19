@@ -1,9 +1,11 @@
-<footer class="bg-neutral-300">
-    <p class="p-2 text-center text-gray-500">
-        <a href="{{ path('app_main') }}">&copy; {{ "now"|date("Y") }} hodlcrypto.fr</a>
-    </p>
-        {% block javascripts %}
+<p class="p-2 text-center text-gray-500">
+    <a href="{{ path('app_main') }}">&copy; {{ "now"|date("Y") }} hodlcrypto.fr</a>
+</p>
+    {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        {# <script src="{{ asset('build/jquery.js') }}"></script> #}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('.select2').select2({
@@ -13,4 +15,3 @@
             });
         </script>
     {% endblock %}
-</footer>

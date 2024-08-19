@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Historique des Transactions
+{% endblock %}
+
+{% block body %}
+	<section class="flex bg-neutral-300">
+		<div class="flex-grow text-gray-800">
+			<main class="p-6 sm:p-10 space-y-6">
+				<div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
+					<div class="mr-6">
+						<h1 class="text-4xl font-semibold mb-2">Historique des Transactions</h1>
+					</div>
+					<div class="flex flex-wrap">
+						<div class="flex flex-wrap items-start justify-end -mb-3">
+							<a class="inline-flex px-5 py-3 text-white bg-teal-600 hover:bg-teal-700 focus:bg-teal-700 rounded-md ml-6 mb-3 whitespace-nowrap" href="{{ path('app_transaction_new') }}">
+								<svg aria-hidden="true" fill="none" viewbox="0 0 24 24" stroke="currentColor" class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+								</svg>
+								Saisir une nouvelle transaction
+							</a>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</section>
+
+	<section class="bg-neutral-300 p-4 lg:px-8">
+		<div class="container mx-auto">
+			<div class="w-auto mt-8 flex flex-col">
+				<table class="border-b border-neutral-700 bg-neutral-700 border border-collapse text-neutral-50 table-auto">
+					<thead>
+						<tr>
+							<th class="border border-neutral-700 w-auto text-left pl-4">Date</th>
+							<th class="border border-neutral-700 w-auto text-left pl-4">Token</th>
+							<th class="border border-neutral-700 w-auto text-left pl-4">Prix à la Transaction</th>
+							<th class="border border-neutral-700 w-auto text-left pl-4">Montant</th>
+							<th class="border border-neutral-700 w-auto text-left pl-4">Type</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for transaction in transactions %}
+							<tr class="{{ transaction[0].transactionType == 'buy' ? 'bg-emerald-200' : 'bg-red-200' }} border border-neutral-700 text-neutral-700">
+								<td class="border border-neutral-700 w-auto whitespace-nowrap px-4 py-1">{{ transaction[0].transactionDate|date('d/m/Y') }}</td>
+								<td class="border border-neutral-700 w-auto whitespace-nowrap px-4 py-1 font-bold">{{ transaction.cryptoName }}</td>
+								<td class="border border-neutral-700 w-auto whitespace-nowrap px-4 py-1">{{ transaction[0].priceAtTransactionInUsdt }}</td>
+								<td class="border border-neutral-700 w-auto whitespace-nowrap px-4 py-1">{{ transaction[0].quantity }}</td>
+								<td class="border border-neutral-700 w-auto whitespace-nowrap px-4 py-1 font-bold">{{ transaction[0].transactionType }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+{% endblock %}

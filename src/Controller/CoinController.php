@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cryptocurrencies;
 use App\Form\CoinType;
-use App\Form\CoinSearchType;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,14 +64,14 @@ class CoinController extends AbstractController
                 $entityManager->persist($coin);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Token ' . $newToken['name'] . ' créé !');
+                $this->addFlash('success', 'Token ' . $newToken['name'] . ' ajouté !');
 
             return $this->redirectToRoute('app_portfolio');
                 }
         }
 
         return $this->render('coin/create.html.twig', [
-            'coinForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

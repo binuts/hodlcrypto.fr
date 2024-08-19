@@ -54,9 +54,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Transactions::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $transactions;
 
+    /**
+     * @var Collection<int, Balances>
+     */
+    #[ORM\OneToMany(targetEntity: Balances::class, mappedBy: 'user')]
+    private Collection $balances;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
+        $this->balances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,7 +201,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->transactions->contains($transaction)) {
             $this->transactions->add($transaction);
-            
+
             $transaction->setUser($this);
         }
 
@@ -212,4 +219,35 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Balances>
+     */
+    public function getBalances(): Collection
+    {
+        return $this->balances;
+    }
+
+    public function addBalance(Balances $balance): static
+    {
+        if (!$this->balances->contains($balance)) {
+            $this->balances->add($balance);
+            $balance->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBalance(Balances $balance): static
+    {
+        if ($this->balances->removeElement($balance)) {
+            // set the owning side to null (unless already changed)
+            if ($balance->getUser() === $this) {
+                $balance->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
