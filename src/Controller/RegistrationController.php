@@ -39,6 +39,13 @@ class RegistrationController extends AbstractController
             return $security->login($user, AppAuthenticator::class, 'main');
         }
 
+        // Ajouter les erreurs de formulaire aux messages flash
+        if ($form->isSubmitted() && !$form->isValid()) {
+            foreach ($form->getErrors(true) as $error) {
+                $this->addFlash('error', $error->getMessage());
+            }
+        }
+
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);

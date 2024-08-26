@@ -1,39 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Log in!
+{% block title %}Connexion
 {% endblock %}
 
 {% block body %}
-<section class="bg-neutral-300 p-4 lg:px-8">
-    <div class="container mx-auto">
-        <h1 class="text-gray-700 text-2xl font-bold mb-4">Se connecter</h1>
+	<section class="bg-neutral-300 p-4 lg:px-8">
 
-        <form method="post">
+		<form method="post">
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="inputEmail">Email :</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="inputPassword">Mot de passe :</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-        </div>
+			<div class="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-white rounded-2xl shadow-xl">
+				<div class="flex flex-col justify-center mx-auto items-center gap-3 pb-4">
+					<div>
+						<img src="{{ asset('img/logo.svg') }}" width="80" alt="Logo hodlcrypto.fr">
+					</div>
+					<h1 class="text-3xl font-bold text-gray-600 my-auto">HODLCRYPTO</h1>
+				</div>
+				<div class="text-xl font-light text-gray-500 pb-8 mx-auto">Connexion</div>
+				<form class="flex flex-col">
+					<div class="pb-2">
+						<label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+						<div class="relative text-gray-400">
+							<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
+									<rect width="20" height="16" x="2" y="4" rx="2"></rect>
+									<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+								</svg>
+							</span>
+							<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="john.doe@example.com" autocomplete="email" required autofocus>
+						</div>
+					</div>
+					<div class="pb-6">
+						<label for="password" class="block mb-2 text-sm font-medium text-gray-700">Mot de passe</label>
+						<div class="relative text-gray-400">
+							<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-asterisk">
+									<rect width="18" height="18" x="3" y="3" rx="2"></rect>
+									<path d="M12 8v8"></path>
+									<path d="m8.5 14 7-4"></path>
+									<path d="m8.5 10 7 4"></path>
+								</svg>
+							</span>
+							<input type="password" name="password" id="inputPassword" placeholder="************" class="form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" autocomplete="current-password" required>
+						</div>
+					</div>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<div class="checkbox mb-3">
+						<label>
+							<input type="checkbox" name="_remember_me">
+							<span class="text-gray-700 text-sm font-medium mb-2">Se souvenir de moi</span>
+						</label>
+					</div>
+					<button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded-lg">
+						Se connecter
+					</button>
+					<div class="py-2 text-sm font-light text-gray-500 ">Vous n'avez pas de compte ?
+						<a href="{{ path('app_register') }}" class="font-medium text-blue-700 hover:underline">S'inscrire</a>
 
-            <input type="hidden" name="_csrf_token"
-                        value="{{ csrf_token('authenticate') }}"
-            >
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> <span class="text-gray-700 text-sm font-bold mb-2">Se souvenir de moi</span>
-                </label>
-            </div>
-
-            <button type="submit" class="bg-neutral-400 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
-                Se connecter
-            </button>
-        </form>
-    </div>
-</section>
-{% endblock %}
+					</div>
+				</form>
+			</div>
+		</section>
+	{% endblock %}

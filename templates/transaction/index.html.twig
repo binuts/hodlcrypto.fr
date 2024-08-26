@@ -1,25 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	Ajouter une transaction
+{% block title %}Ajouter une transaction
 {% endblock %}
 
 {% block body %}
-	<section class="bg-gray-100 p-6 lg:px-12 min-h-screen flex items-center justify-center">
-		<div class="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
-			<h1 class="text-gray-800 text-3xl font-bold mb-6 whitespace-nowrap">Ajouter une transaction</h1>
+	<section class="bg-neutral-300 p-4 lg:px-8">
+    <div class="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-white rounded-2xl shadow-xl">
+			<h1 class="text-2xl font-bold text-gray-500 pb-8 mx-auto whitespace-nowrap">Ajouter une transaction</h1>
 
 			{{ form_errors(transactionForm) }}
 
-			{{ form_start(transactionForm, {'attr': {'class': 'space-y-6'}}) }}
+			{{ form_start(transactionForm) }}
 
-			<div class="space-y-4">
-				{{ form_widget(transactionForm.crypto, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-md'}}) }}
-				{{ form_widget(transactionForm.quantity, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-md'}}) }}
-				{{ form_widget(transactionForm.transactionType, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-md'}}) }}
-				{{ form_widget(transactionForm.priceAtTransactionInUsdt, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-md'}}) }}
-				{{ form_widget(transactionForm.transactionDate, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-md'}}) }}
-			</div>
+			<div class="flex flex-col">
+				<div class="pb-2">
+					{{ form_label(transactionForm.crypto, 'Crypto', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-700'}}) }}
+					<div class="relative text-gray-400">
+						<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+						</span>
+						{{ form_widget(transactionForm.crypto, {'attr': {'class': 'form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4'}}) }}
+					</div>
+				</div>
+				<div class="pb-2">
+					{{ form_label(transactionForm.quantity, 'Quantité', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-700'}}) }}
+					<div class="relative text-gray-400">
+						<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-digit"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><rect width="4" height="6" x="2" y="12" rx="2"/><path d="M10 12h2v6"/><path d="M10 18h4"/></svg>
+						</span>
+						{{ form_widget(transactionForm.quantity, {'attr': {'class': 'form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4'}}) }}
+					</div>
+				</div>
+
+				{# <div class="pb-2">
+					{{ form_label(transactionForm.transactionType, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-700'}}) }}
+					<div class="relative text-gray-400">
+						<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
+								<rect width="20" height="16" x="2" y="4" rx="2"></rect>
+								<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+							</svg>
+						</span>
+						{{ form_widget(transactionForm.transactionType, {'attr': {'class': 'form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4'}}) }}
+					</div>
+				</div> #}
+
+				<div class="pb-2">
+					{{ form_label(transactionForm.priceAtTransactionInUsdt, 'Prix', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-700'}}) }}
+					<div class="relative text-gray-400">
+						<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dollar-sign"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+						</span>
+						{{ form_widget(transactionForm.priceAtTransactionInUsdt, {'attr': {'class': 'form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4'}}) }}
+					</div>
+				</div>
+
+				<div class="pb-2">
+					{{ form_label(transactionForm.transactionDate, 'Date', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-700'}}) }}
+					<div class="relative text-gray-400">
+						<span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
+						</span>
+						{{ form_widget(transactionForm.transactionDate, {'attr': {'class': 'form-control pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4'}}) }}
+					</div>
+				</div>
 
 			<div class="flex justify-end mt-6">
 				<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
